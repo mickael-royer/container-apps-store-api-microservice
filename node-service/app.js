@@ -9,6 +9,17 @@ var ordersRouter = require('./routes/orders');
 var inventoryRouter = require('./routes/inventory');
 
 const appPort = process.env.PORT || 3000; 
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  baseURL: 'https://dev.royer.page',
+  clientID: 'LDvGD1rk91keflIBE7zvV4uFSw08nGII',
+  issuerBaseURL: 'https://dev-470db2ho.us.auth0.com',
+  secret: 'f0f831cd7c0f7f6e1015efb4714b07d5e161dd6fa0ec74a7377c547485f3bac7'
+};
+
 var app = express();
 
 // view engine setup
@@ -20,6 +31,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// Middleware to make the `user` object available for all views
+app.use(function (req, res, next) {
+  res.locals.user = req.oidc.user;
+  next();
+});
 
 // expose the swagger.json OpenAPI definition
 app.use(express.static(path.join(__dirname, 'open-api')));
