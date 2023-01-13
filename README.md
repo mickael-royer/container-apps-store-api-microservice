@@ -52,8 +52,16 @@ The entire solution is configured with [GitHub Actions](https://github.com/featu
 
 5. After calling each microservice, you can open the application insights resource created and select the **Application Map**, you should see a visualization of your calls between Container Apps (note: it may take a few minutes for the app insights data to ingest and process into the app map view).
 
+## AuthN based on Auth0
+
+Create and App on [Auth0](https://auth0.com/docs/quickstart/webapp/express) and protect routes of node-app
+
 ## Build and Run
 
 [Click here for instructions on building and running the application locally](build-and-run.md)
+
+## Post Build
+
+[Add Custom Domain and Certificat](https://learn.microsoft.com/en-us/azure/container-apps/custom-domains-certificates) to node-app base on [Google Domain](https://domains.google.com/)
 
 
