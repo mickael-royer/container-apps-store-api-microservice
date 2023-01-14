@@ -11,10 +11,9 @@ var inventoryRouter = require('./routes/inventory');
 const appPort = process.env.PORT || 3000; 
 const { auth } = require('express-openid-connect');
 
-const config = {
-  authRequired: false,
+const authConfig = {
+  authRequired: process.env.NODE_ENV !== 'development',
   auth0Logout: true,
-  //baseURL: 'https://localhost:3000',
   baseURL: 'https://dev.royer.page',
   clientID: 'LDvGD1rk91keflIBE7zvV4uFSw08nGII',
   issuerBaseURL: 'https://dev-470db2ho.us.auth0.com',
@@ -35,7 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+app.use(auth(authConfig));
 
 // Middleware to make the `user` object available for all views
 app.use(function (req, res, next) {

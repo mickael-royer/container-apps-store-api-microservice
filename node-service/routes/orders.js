@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../auth');
 const axios = require('axios').default;
 const orderService = process.env.ORDER_SERVICE_NAME || 'python-app';
 const daprPort = process.env.DAPR_HTTP_PORT || 3500;
@@ -9,7 +8,7 @@ const daprPort = process.env.DAPR_HTTP_PORT || 3500;
 const daprSidecar = `http://localhost:${daprPort}`
 
 /* GET order by calling order microservice via dapr */
-router.get('/', auth, async function(req, res, next) {
+router.get('/', async function(req, res, next) {
 
   console.log('Service invoke to: ' + `${daprSidecar}/order?id=${req.query.id}`);
   var data = await axios.get(`${daprSidecar}/order?id=${req.query.id}`, {
@@ -21,7 +20,7 @@ router.get('/', auth, async function(req, res, next) {
 });
 
 /* POST create order by calling order microservice via dapr */
-router.post('/', auth, async function(req, res, next) {
+router.post('/', async function(req, res, next) {
   try{
     var order = req.body;
     order['location'] = 'Seattle';
@@ -39,7 +38,7 @@ router.post('/', auth, async function(req, res, next) {
 });
 
 /* DELETE order by calling order microservice via dapr */
-router.post('/delete', auth, async function(req, res ) {
+router.post('/delete', async function(req, res ) {
    
   var data = await axios.delete(`${daprSidecar}/order?id=${req.body.id}`, {
     headers: {'dapr-app-id': `${orderService}`}
