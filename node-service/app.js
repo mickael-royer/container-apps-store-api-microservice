@@ -15,7 +15,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   //baseURL: 'https://localhost:3000',
-  baseURL: 'https://dev.royer.page:3000',
+  baseURL: 'https://dev.royer.page',
   clientID: 'LDvGD1rk91keflIBE7zvV4uFSw08nGII',
   issuerBaseURL: 'https://dev-470db2ho.us.auth0.com',
   secret: 'f0f831cd7c0f7f6e1015efb4714b07d5e161dd6fa0ec74a7377c547485f3bac7'
