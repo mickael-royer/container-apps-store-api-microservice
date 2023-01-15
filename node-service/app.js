@@ -1,3 +1,4 @@
+//var env = require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -12,7 +13,8 @@ const appPort = process.env.PORT || 3000;
 const { auth } = require('express-openid-connect');
 
 const authConfig = {
-  authRequired: process.env.NODE_ENV !== 'development',
+  //authRequired: process.env.NODE_ENV !== 'development',
+  authRequired: true,
   auth0Logout: true,
   baseURL: 'https://dev.royer.page',
   clientID: 'LDvGD1rk91keflIBE7zvV4uFSw08nGII',
