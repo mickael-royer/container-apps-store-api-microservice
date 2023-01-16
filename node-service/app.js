@@ -14,7 +14,7 @@ const { auth } = require('express-openid-connect');
 
 const authConfig = {
   //authRequired: process.env.NODE_ENV !== 'development',
-  authRequired: true,
+  authRequired: false,
   auth0Logout: true,
   baseURL: 'https://dev.royer.page',
   clientID: 'LDvGD1rk91keflIBE7zvV4uFSw08nGII',
